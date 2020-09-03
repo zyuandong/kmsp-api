@@ -16,4 +16,25 @@ router.get('/json', async (ctx, next) => {
   }
 })
 
+router.post('/test-post', async (ctx, next) => {
+  ctx.body = {
+    status: 200,
+    message: 'success'
+  }
+})
+
+router.put('/test-put', async (ctx, next) => {
+  ctx.body = {
+    status: 200,
+    message: 'success'
+  }
+})
+
+router.delete('/test-delete', async (ctx, next) => {
+  ctx.body = {
+    status: 200,
+    message: 'success'
+  }
+})
+
 module.exports = router
