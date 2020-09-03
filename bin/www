@@ -8,6 +8,7 @@ var app = require('../app');
 var debug = require('debug')('demo:server');
 var http = require('http');
 
+const path = require('path')
 /**
  * Get port from environment and store in Express.
  */
@@ -28,6 +29,12 @@ var server = http.createServer(app.callback());
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+console.log(`run success, koa is listening in ${port}`)
+console.log(`. = ${path.resolve('.')}`);// . 指向执行 node 命令的路径
+console.log(`__dirname = ${__dirname}`);
+console.log(`__filename = ${__filename}`);
+console.log(`path.dirname(__filename) = ${path.dirname(__filename)}`);
 
 /**
  * Normalize a port into a number, string, or false.
