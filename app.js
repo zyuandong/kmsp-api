@@ -5,6 +5,7 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const koaBody = require('koa-body')
 require('./model/index')
 
 const index = require('./routes/index')
@@ -35,6 +36,15 @@ app.use(async (ctx, next) => {
   const ms = new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
+
+// koa-body 需要再注册路由之前引用
+app.use(koaBody({
+  multipart: true,
+  // formidable: {
+  //   multipart: true,
+  //   maxFileSize: 200 * 1024 * 1024 // 默认 2M
+  // }
+}))
 
 // routes
 app.use(index.routes())
