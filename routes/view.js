@@ -9,6 +9,9 @@ router
   .get('/users', async (ctx) => {
     await ctx.render('user')
   })
+  .get('/users/add', async (ctx) => {
+    await ctx.render('user/add')
+  })
   .get('/chat', async (ctx) => {
     await ctx.render('chat', {
       title: 'Chat Room!'

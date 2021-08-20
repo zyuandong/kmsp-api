@@ -1,0 +1,34 @@
+head 
+  link(rel='stylesheet', href='/stylesheets/style.css')
+body
+  h1 Add User
+  a.m-b-8.inline-block(href="/users") Back 
+  form(action="/api/users", method="post", enctype="application/x-www-form-urlencoded") 
+    div.m-b-16
+      label(for="name") Name
+      br
+      input#name(type="text", name="name")
+    div.m-b-16
+      label(for="age") Age
+      br
+      input#age(type="text", name="Age")
+    div.m-b-16
+      label(for="sex") Sex
+      br
+      label(for="") Male
+        input(type="radio", name="sex", value="m") 
+      label(for="") Female
+        input(type="radio", name="sex", value="f") 
+    div.m-b-16
+      label(for="brithday") Brithday
+      br
+      input#brithday(type="datetime", name="brithday")
+    div.m-b-16
+      label(for="description") Description
+      br
+      textarea#description(name="description", cols="30", rows="10") 
+    button(type="reset") Reset 
+    button(type="submit") Submit
+
+  button#btn-add(onclick="handleAdd()") add
+  script(src="/javascripts/addUser.js") 
