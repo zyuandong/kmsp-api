@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/chat.css')
+  body
+    block content
+    a(href="/") 返回
+    div#chat-room
+      h1 Chat Room
+      div.chat-box
+      div.user-box
+        input.user-name(type="text", placeholder="username")
+        button.btn-sure Sure
+      div.enter-box
+        input.message(type="text", placeholder="message")
+        button.btn-enter(disabled=true) Enter
+    script(src="https://cdn.bootcdn.net/ajax/libs/socket.io/3.0.0-rc4/socket.io.js")
+    script(src="/javascripts/chat.js")

@@ -8,8 +8,7 @@ const logger = require('koa-logger')
 const koaBody = require('koa-body')
 require('./model/index')
 
-const index = require('./routes/index')
-const users = require('./routes/users')
+const router = require('./routes/index')
 
 // const Router = require('koa-router')
 // const router = new Router()
@@ -47,13 +46,12 @@ app.use(koaBody({
 }))
 
 // routes
-app.use(index.routes())
-app.use(index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
-
 // router.post('/test-post', async () => {})
 // app.use(router.routes())
 // app.use(router.allowedMethods())
+Object.keys(router).forEach((item) => {
+  app.use(router[item].routes(), router[item].allowedMethods())
+})
 
 // error-handling
 app.on('error', (err, ctx) => {

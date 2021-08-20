@@ -5,6 +5,12 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     block content
-    include chat.pug
-    script(src="https://cdn.bootcdn.net/ajax/libs/socket.io/3.0.0-rc4/socket.io.js")
-    script(src="/javascripts/chat.js")
+    ul 
+      li 
+        a(href='/chat') Chat Room
+      li
+        a(href='/apples') Apples
+      li Swagger
+    //- include chat.pug
+    //- script(src="https://cdn.bootcdn.net/ajax/libs/socket.io/3.0.0-rc4/socket.io.js")
+    //- script(src="/javascripts/chat.js")

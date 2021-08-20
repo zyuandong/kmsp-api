@@ -19,6 +19,8 @@ npm run start
 
 # nodemon 工具启动
 npm run dev
+# or
+npx nodemon bin/www
 
 # pm2 工具启动
 npm run prd
