@@ -1,9 +1,9 @@
-const apple = require('./apple');
-const chat = require('./chat');
-const user = require('./user');
+const view = require("./view");
+const test = require("./test");
+const user = require("./user");
 
 module.exports = {
-  apple,
+  view,
+  test,
   user,
-  chat
 };
