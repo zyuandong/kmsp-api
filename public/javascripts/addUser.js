@@ -1,22 +1,18 @@
 let xhr = null;
 
-
-if (window.XMLHttpRequest) {
-  xhr = new XMLHttpRequest()
-} else {
-  xhr = new ActiveXObject("Microsoft.XMLHTTP");
-}
-
-
-const handleAdd = () => {
-  xhr.open('post', '/api/users', true);
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-  xhr.send({name: 1121212});
-}
-
-xhr.onreadystatechange = () => {
-  if (xhr.readyState === 4 && xhr.status === 200) {
-    const res = JSON.parse(xhr.responseText);
-    console.log(res);
+const validateForm = () => {
+  const name = document.forms['userForm']['name'].value;
+  if (!name) {
+    alert('Name is required!');
+    return false
   }
+  return true;
 }
+
+/**
+ * TODO
+ * 500 Error:
+ * 1. 未填写字段
+ * 2. 输入类型有误
+ * 提示信息不明确
+ */

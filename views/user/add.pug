@@ -3,7 +3,7 @@ head
 body
   h1 Add User
   a.m-b-8.inline-block(href="/users") Back 
-  form(action="/api/users", method="post", enctype="application/x-www-form-urlencoded") 
+  form(name="userForm", action="/api/users", method="post", enctype="application/x-www-form-urlencoded", onsubmit="return validateForm()") 
     div.m-b-16
       label(for="name") Name
       br
@@ -11,7 +11,7 @@ body
     div.m-b-16
       label(for="age") Age
       br
-      input#age(type="text", name="Age")
+      input#age(type="text", name="age")
     div.m-b-16
       label(for="sex") Sex
       br
@@ -19,16 +19,15 @@ body
         input(type="radio", name="sex", value="m") 
       label(for="") Female
         input(type="radio", name="sex", value="f") 
-    div.m-b-16
-      label(for="brithday") Brithday
-      br
-      input#brithday(type="datetime", name="brithday")
+    //- div.m-b-16
+    //-   label(for="birthday") Birthday
+    //-   br
+    //-   input#birthday(type="datetime", name="birthday")
     div.m-b-16
       label(for="description") Description
       br
       textarea#description(name="description", cols="30", rows="10") 
     button(type="reset") Reset 
     button(type="submit") Submit
-
-  button#btn-add(onclick="handleAdd()") add
+  //- button#btn-add(onclick="handleAdd()") add
   script(src="/javascripts/addUser.js") 

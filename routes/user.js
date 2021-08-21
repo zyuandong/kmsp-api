@@ -13,15 +13,18 @@ router
     ctx.body = data;
   })
   .post('/', async(ctx, next) => {
-    console.log('=== post users ===', ctx.request);
-    let data = await Sql.insert('user', ctx.request.body);
-    ctx.body = data;
+    console.log('=== post users ===', ctx.request.body);
+    // let data = await Sql.insert('user', ctx.request.body);
+    await Sql.insert('user', ctx.request.body);
+    // ctx.body = data;
+    return ctx.render('user');
   })
   .put('/:id', async ctx => {
     let data = await Sql.update('user', ctx.params.id, ctx.request.body);
     ctx.body = data;
   })
   .del('/:id', async ctx => {
+    console.log('== delete ==', ctx.params.id);
     let data = await Sql.delete('user', ctx.params.id);
     ctx.body = data;
   })
