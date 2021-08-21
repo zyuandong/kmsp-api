@@ -45,7 +45,7 @@ const getData = () => {
 getData()
 
 const handleEdit = (id) => {
-  console.log(id);
+  location.href = `/users/edit/${id}`
 }
 
 const handleDelete = (id) => {

@@ -1,9 +1,9 @@
 head 
   link(rel='stylesheet', href='/stylesheets/style.css')
 body
-  h1 Add User
+  h1= title
   a.m-b-8.inline-block(href="/users") Back 
-  form(name="userForm", action="/api/users", method="post", enctype="application/x-www-form-urlencoded", onsubmit="return validateForm()") 
+  form(name="userForm", action=`/api/users/${id ? id : ''}`, method='post', enctype="application/x-www-form-urlencoded", onsubmit="return validateForm()") 
     div.m-b-16
       label(for="name") Name
       br
@@ -29,5 +29,4 @@ body
       textarea#description(name="description", cols="30", rows="10") 
     button(type="reset") Reset 
     button(type="submit") Submit
-  //- button#btn-add(onclick="handleAdd()") add
-  script(src="/javascripts/addUser.js") 
+  script(src="/javascripts/userForm.js") 
