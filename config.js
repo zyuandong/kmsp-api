@@ -1,10 +1,10 @@
 const config = {
   port: 3000,
   database: {
-    host: 'localhost',
+    host: '47.96.178.84',
     port: '3306',
     user: 'root',
-    password: '******',
+    password: '12345678',
     database: 'dev_db'
   }
 }
