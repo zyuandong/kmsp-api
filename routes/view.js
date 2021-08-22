@@ -26,5 +26,10 @@ router
       title: 'Chat Room!'
     })
   })
+  .get('/graphql_demo', async (ctx) => {
+    await ctx.render('graphql', {
+      title: 'GraphQL Demo'
+    })
+  })
 
 module.exports = router;
