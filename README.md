@@ -35,6 +35,13 @@ npm run prd
 3. 注册路由
 4. 引入数据模型文件，并执行
 
+## GraphQL 相关
+
+- 请求方式 get/post/put/delete ?
+- graphql-client ? apollo-server ?
+- 与数据库交互 ? 联表 ？
+- 分页？ 上传？ 鉴权？
+
 ## TODO
 
 - [ ] 联表操作
