@@ -40,8 +40,9 @@ const spacexData = () => {
     })
 
     res.on('end', () => {
-      console.log(JSON.parse(str)[0]);
+      // console.log(JSON.parse(str)[0]);
       return JSON.parse(str)[0];
+      // return 
     })
   })
 }
