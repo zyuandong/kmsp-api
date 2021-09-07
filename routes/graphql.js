@@ -1,7 +1,7 @@
 const router = require('koa-router')();
 const koaGraphql = require('koa-graphql');
-const userSchema = require('../schemas/user');
-const {query} = require('../schemas/spaceX');
+const { baseSchema, query } = require('../schemas/user');
+const schema = require('../schemas/spaceX');
 // const http = require('http')
 const https = require('https');
 
@@ -12,11 +12,23 @@ const resolvers = {
 router.all(
   '/graphql',
   koaGraphql({
-    schema: userSchema,
+    schema: baseSchema,
     rootValue: resolvers,
     graphiql: true,
   })
 );
+
+router.all(
+  '/graphql/space_x',
+  koaGraphql({
+    schema,
+    graphiql: true,
+  })
+);
+
+router.all('/graphql/users', koaGraphql({ schema: query, graphiql: true }));
+
+module.exports = router;
 
 // const spacexData = async () => {
 //   await https.get('https://api.spacexdata.com/v3/launches', (res) => {
@@ -32,13 +44,3 @@ router.all(
 //     });
 //   });
 // };
-
-router.all(
-  '/graphql/space_x',
-  koaGraphql({
-    schema: query,
-    graphiql: true,
-  })
-);
-
-module.exports = router;

@@ -109,8 +109,8 @@ const rootQueryType = new GraphQLObjectType({
   },
 });
 
-const query = new GraphQLSchema({
+const schema = new GraphQLSchema({
   query: rootQueryType,
 });
 
-module.exports = { query };
+module.exports = schema;
