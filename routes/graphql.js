@@ -1,6 +1,6 @@
 const router = require('koa-router')();
 const koaGraphql = require('koa-graphql');
-const { baseSchema, query } = require('../schemas/user');
+const { baseSchema, schema: userSchema } = require('../schemas/user');
 const schema = require('../schemas/spaceX');
 // const http = require('http')
 const https = require('https');
@@ -26,7 +26,13 @@ router.all(
   })
 );
 
-router.all('/graphql/users', koaGraphql({ schema: query, graphiql: true }));
+router.all(
+  '/graphql/users',
+  koaGraphql({
+    schema: userSchema,
+    graphiql: true,
+  })
+);
 
 module.exports = router;
 

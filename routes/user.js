@@ -15,8 +15,8 @@ router
   .post('/', async(ctx, next) => {
     console.log('=== post users ===', ctx.request.body);
     // let data = await Sql.insert('user', ctx.request.body);
-    await Sql.insert('user', ctx.request.body);
-    // ctx.body = data;
+    let data = await Sql.insert('user', ctx.request.body);
+    ctx.body = data;
     return ctx.render('user');
   })
   .post('/:id', async ctx => {
