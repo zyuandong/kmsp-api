@@ -10,11 +10,38 @@ const {
 } = require('graphql');
 const axios = require('axios');
 
+const mockPetData = [
+  {
+    id: 1,
+    name: 'tuo',
+    age: 12,
+  },
+  {
+    id: 2,
+    name: 'mao',
+    age: 11,
+  },
+  {
+    id: 3,
+    name: 'miu',
+    age: 2,
+  },
+];
+
 const baseSchema = buildSchema(`
   type Query {
     hello: String,
   }
 `);
+
+const petType = new GraphQLObjectType({
+  name: 'pet',
+  fields: {
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    age: { type: GraphQLInt },
+  },
+});
 
 const userType = new GraphQLObjectType({
   name: 'user',
@@ -25,6 +52,18 @@ const userType = new GraphQLObjectType({
     sex: { type: GraphQLString },
     birthday: { type: GraphQLString },
     description: { type: GraphQLString },
+    pet: {
+      type: petType,
+      args: {
+        id: {
+          type: GraphQLInt,
+        },
+      },
+      resolve(parent, args) {
+        console.log(parent);
+        return mockPetData.filter((item) => item.id === parent.id);
+      },
+    },
   },
 });
 
@@ -46,6 +85,7 @@ const queryType = new GraphQLObjectType({
         id: { type: GraphQLInt },
       },
       resolve(parent, { id }) {
+        console.log('==parent', parent);
         return axios
           .get(`http://localhost:3000/api/users`)
           .then((res) => {
@@ -54,6 +94,22 @@ const queryType = new GraphQLObjectType({
           .catch((err) => {
             console.log(err);
           });
+      },
+    },
+    user_pet: {
+      type: new GraphQLList(userType),
+      args: {},
+      resolve(parent, args) {
+        console.log('==parent', parent);
+
+        return axios
+          .get(`http://localhost:3000/api/users`)
+          .then((res) => {
+            // res.data.forEach(item => console.log(););
+            console.log('==parent', parent);
+            return res.data;
+          })
+          .catch();
       },
     },
   },
