@@ -9,10 +9,20 @@ const tables = {
       sex CHAR(1) DEFAULT 'n',
       avatar BLOB,
       birthday DATETIME,
-      description TEXT
+      description TEXT,
+      pet_id INT
     )
     ENGINE=InnoDB
     DEFAULT CHARSET=utf8mb4;
+  `,
+  pet: `
+  CREATE TABLE IF NOT EXISTS pet(
+    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    age INT DEFAULT 0
+  )
+  ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4;
   `
 }
 

@@ -7,6 +7,7 @@ const {
   GraphQLInt,
   GraphQLObjectType,
   GraphQLList,
+  graphql,
 } = require('graphql');
 const axios = require('axios');
 
@@ -52,16 +53,17 @@ const userType = new GraphQLObjectType({
     sex: { type: GraphQLString },
     birthday: { type: GraphQLString },
     description: { type: GraphQLString },
+    pet_id: { type: GraphQLInt },
     pet: {
       type: petType,
-      args: {
-        id: {
-          type: GraphQLInt,
-        },
-      },
-      resolve(parent, args) {
-        console.log(parent);
-        return mockPetData.filter((item) => item.id === parent.id);
+      async resolve(parent, args) {
+        return await axios
+          .get(`http://localhost:3000/api/pets/${parent.pet_id}`)
+          .then((res) => {
+            return res.data;
+          })
+          .catch();
+        // return mockPetData.filter((item) => item.id === parent.id)[0];
       },
     },
   },
@@ -84,34 +86,39 @@ const queryType = new GraphQLObjectType({
       args: {
         id: { type: GraphQLInt },
       },
-      resolve(parent, { id }) {
-        console.log('==parent', parent);
-        return axios
+      async resolve(parent, { id }) {
+        return await axios
           .get(`http://localhost:3000/api/users`)
-          .then((res) => {
-            return res.data;
-          })
+          .then((res) => res.data)
           .catch((err) => {
             console.log(err);
           });
       },
     },
-    user_pet: {
-      type: new GraphQLList(userType),
-      args: {},
-      resolve(parent, args) {
-        console.log('==parent', parent);
-
+    pet: {
+      type: petType,
+      args: {
+        id: { type: GraphQLInt },
+      },
+      resolve(parent, { id }) {
         return axios
-          .get(`http://localhost:3000/api/users`)
-          .then((res) => {
-            // res.data.forEach(item => console.log(););
-            console.log('==parent', parent);
-            return res.data;
-          })
+          .get(`http://localhost:3000/api/pets/${id}`)
+          .then((res) => res.data)
           .catch();
       },
     },
+    // user_pet: {
+    //   type: new GraphQLList(userType),
+    //   args: {},
+    //   resolve(parent, args) {
+    //     return axios
+    //       .get(`http://localhost:3000/api/users`)
+    //       .then((res) => {
+    //         return res.data;
+    //       })
+    //       .catch();
+    //   },
+    // },
   },
 });
 
