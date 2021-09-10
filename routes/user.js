@@ -10,7 +10,7 @@ router
   })
   .get('/:id', async ctx => {
     let data = await Sql.queryById('user', ctx.params.id);
-    ctx.body = data;
+    ctx.body = data[0];
   })
   .post('/', async(ctx, next) => {
     console.log('=== post users ===', ctx.request.body);

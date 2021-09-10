@@ -7,7 +7,6 @@ const {
   GraphQLInt,
   GraphQLObjectType,
   GraphQLList,
-  graphql,
 } = require('graphql');
 const axios = require('axios');
 
@@ -57,6 +56,9 @@ const userType = new GraphQLObjectType({
     pet: {
       type: petType,
       async resolve(parent, args) {
+        if (!parent.pet_id) {
+          return null;
+        }
         return await axios
           .get(`http://localhost:3000/api/pets/${parent.pet_id}`)
           .then((res) => {
@@ -81,6 +83,20 @@ const resType = new GraphQLObjectType({
 const queryType = new GraphQLObjectType({
   name: 'rootQuery',
   fields: {
+    user: {
+      type: userType,
+      args: {
+        id: { type: GraphQLInt },
+      },
+      resolve(parent, { id }) {
+        return axios
+          .get(`http://localhost:3000/api/users/${id}`)
+          .then((res) => {
+            return res.data;
+          })
+          .catch();
+      },
+    },
     users: {
       type: new GraphQLList(userType),
       args: {
@@ -194,6 +210,9 @@ const mutationType = new GraphQLObjectType({
     },
   },
 });
+
+// subscription
+// fragment
 
 const schema = new GraphQLSchema({
   query: queryType,
