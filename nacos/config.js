@@ -4,9 +4,10 @@ const dev = {
   server: {
     list: '192.168.67.17:8848',
     // namespace: 'df03bed2-ebd9-45b4-bd40-4c697eb5a43a',
-    namespace: 'public',
+    namespace: 'dev',
     // group: 'koa',
-    group: 'DEFAULT_GROUP'
+    // group: 'DEFAULT_GROUP'
+    group: 'BFF'
   },
 
   service: {

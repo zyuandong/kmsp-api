@@ -10,9 +10,9 @@ require('./model/index')
 
 const router = require('./routes/index')
 
-// const nacos = require('./nacos');
-// nacos.register();
-// nacos.discovery();
+const nacos = require('./nacos');
+nacos.register();
+nacos.discovery();
 
 // const Router = require('koa-router')
 // const router = new Router()

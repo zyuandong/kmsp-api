@@ -1,7 +1,8 @@
-const NacosNamingClient = require('nacos').NacosNamingClient;
-const { config } = require('./config.js');
+const NacosNamingClient = require("nacos").NacosNamingClient;
+const { config } = require("./config.js");
 const logger = console;
-const http = require('http');
+const axios = require("axios");
+// const http = require("http");
 
 const serviceName = config.service.name;
 
@@ -30,32 +31,27 @@ const register = async () => {
 const discovery = async () => {
   const client = nacos();
   await client.ready();
-  const instances = await client.getAllInstances('file-service', config.server.group);
+  const instances = await client.getAllInstances(
+    "integration-cico-service",
+    //config.server.group,
+    "default"
+  );
 
   const [instance] = instances.filter((item) => {
     return item.healthy;
   });
 
   const { ip, port } = instance;
-  // console.log('==', instances);
+  console.log("==", instances);
 
-  http.get(
-    {
-      hostname: ip,
-      port: port,
-      path: `/integration-module-demo-biz/apis/v1/files/884474756995219456`,
-    },
-    (res) => {
-      var str = '';
-      res.on('data', (data) => {
-        str += data;
-      });
-
-      res.on('end', () => {
-        console.log(JSON.parse(str));
-      });
-    }
-  );
+  axios({
+    method: "get",
+    url: `http://${ip}:${port}/reg/apply/890658571694374912`,
+  })
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => console.log(err));
 };
 
 module.exports = { register, discovery };
